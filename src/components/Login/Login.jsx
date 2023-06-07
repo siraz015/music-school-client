@@ -1,25 +1,44 @@
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProviders';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const { signInUser } = useContext(AuthContext);
 
     const onSubmit = data => {
         console.log(data.email)
+
+        signInUser(data.email, data.password)
+        .then(result => {
+            const loginUser = result.user;
+            console.log(loginUser);
+
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Login Successfully',
+                showConfirmButton: false,
+                timer: 1500
+              })
+        })
     }
 
 
     return (
         <>
             <div className="bg-base-100">
-                <div className="max-w-[1280px] mx-auto flex gap-7">
-                    <div className="shadow-2xl card">
+                <div className="max-w-[1100px] mx-auto flex gap-20 my-5">
+                    <div className="shadow-2xl md:w-1/2 card">
                         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+                            <h2 className='text-5xl text-center font-semibold mb-5'>Please Login!</h2>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="email" {...register("email", { required: true })}name="email" placeholder="email" className="input input-bordered" />
+                                <input type="email" {...register("email", { required: true })} name="email" placeholder="email" className="input input-bordered" />
                                 {errors.email && <span className='text-red-600 mt-1'>This field is required</span>}
                             </div>
                             <div className="form-control">
@@ -36,9 +55,9 @@ const Login = () => {
                                 <input className="btn btn-primary" type="submit" value="Login" />
                             </div>
                         </form>
-                        <p><small>New Here? <Link to="/signup">Create an account</Link> </small></p>
+                        <p className='-mt-5 mb-5 ml-8'><small>New Here? <Link to="/signup">Create an account</Link> </small></p>
                     </div>
-                    <div className="text-center md:w-1/2 lg:text-left">
+                    <div className=" md:w-1/2 ">
                         <img src="https://i.ibb.co/dPyJDts/login1.png" alt="" />
                     </div>
                 </div>
