@@ -7,16 +7,23 @@ import SocialLogin from '../SocialLogin/SocialLogin';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUserProfile } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
 
     const onSubmit = data => {
-        console.log(data)
 
         createUser(data.email, data.password)
             .then(result => {
                 const createdUser = result.user;
                 console.log(createdUser);
+
+                updateUserProfile(data.name, data.photoURL)
+                    .then(() => {
+                        console.log('url profile info updated');
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
 
                 Swal.fire({
                     position: 'top-end',
@@ -24,7 +31,7 @@ const SignUp = () => {
                     title: 'User Created Successfully',
                     showConfirmButton: false,
                     timer: 1500
-                  })
+                })
             })
             .catch(err => {
                 console.log(err);
@@ -78,14 +85,14 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">Photo URL</span>
                             </label>
-                            <input type="photo" {...register("photo", { required: true })} name="photo" placeholder="Photo URL" className="input input-bordered" />
+                            <input type="photo" {...register("photoURL", { required: true })} name="photo" placeholder="Photo URL" className="input input-bordered" />
                             {errors.photo && <span className='text-red-600 mt-1'>This field is required</span>}
                         </div>
                         <div className="form-control mt-6">
                             <input className="btn btn-primary" type="submit" value="Sign Up" />
                         </div>
                     </form>
-                    <p className='-mt-5 mb-5 ml-8'><small>Already have account? <Link to="/login">Please Login!</Link> </small></p>
+                    <p className='-mt-5 ml-8'><small>Already have account? <Link to="/login">Please Login!</Link> </small></p>
                     <SocialLogin></SocialLogin>
                 </div>
             </div>

@@ -78,7 +78,7 @@ const Login = () => {
                                 <input className="btn btn-primary" type="submit" value="Login" />
                             </div>
                         </form>
-                        <p className='-mt-5 mb-5 ml-8'><small>New Here? <Link to="/signup">Create an account</Link> </small></p>
+                        <p className='-mt-5 ml-8'><small>New Here? <Link to="/signup">Create an account</Link> </small></p>
                         <SocialLogin></SocialLogin>
                     </div>
                     <div className=" md:w-1/2 ">

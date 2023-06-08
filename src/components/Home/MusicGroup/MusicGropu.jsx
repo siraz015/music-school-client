@@ -8,7 +8,7 @@ const MusicGropu = () => {
                     <h2 className="text-7xl font-semibold">Music Groups</h2>
                     <p className="text-3xl italic font-normal text-gray-600">for</p>
                 </div>
-                <div className="flex gap-5 pb-10">
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 pb-10">
                     <div className="text-center">
                         <img className="w-40 h-40 mx-auto rounded-full" src="https://i.ibb.co/PC83T1z/services-3.jpg" alt="" />
                         <h3 className="text-3xl font-semibold my-4">Kids</h3>
