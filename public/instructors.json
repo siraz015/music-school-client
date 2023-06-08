@@ -1,0 +1,31 @@
+[{
+        "image": "https://example.com/instructor1.jpg",
+        "name": "John Smith",
+        "email": "john.smith@example.com"
+    },
+    {
+        "image": "https://example.com/instructor2.jpg",
+        "name": "Emily Johnson",
+        "email": "emily.johnson@example.com"
+    },
+    {
+        "image": "https://example.com/instructor3.jpg",
+        "name": "Michael Davis",
+        "email": "michael.davis@example.com"
+    },
+    {
+        "image": "https://example.com/instructor4.jpg",
+        "name": "Sarah Thompson",
+        "email": "sarah.thompson@example.com"
+    },
+    {
+        "image": "https://example.com/instructor5.jpg",
+        "name": "David Wilson",
+        "email": "david.wilson@example.com"
+    },
+    {
+        "image": "https://example.com/instructor6.jpg",
+        "name": "Jennifer Lee",
+        "email": "jennifer.lee@example.com"
+    }
+]

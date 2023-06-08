@@ -1,12 +1,14 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProviders';
 import Swal from 'sweetalert2';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { createUser } = useContext(AuthContext);
+    const [showPassword, setShowPassword] = useState(false);
 
     const onSubmit = data => {
         console.log(data)
@@ -29,6 +31,10 @@ const SignUp = () => {
             })
     }
 
+    const handleCheckboxChange = () => {
+        setShowPassword(!showPassword);
+    };
+
 
     return (
         <div className="bg-base-100">
@@ -50,20 +56,22 @@ const SignUp = () => {
                             <input type="email" {...register("email", { required: true })} name="email" placeholder="email" className="input input-bordered" />
                             {errors.email && <span className='text-red-600 mt-1'>This field is required</span>}
                         </div>
-                        <div className='flex gap-10 w-full'>
+                        <div className='flex gap-10 w-full relative'>
                             <div className="form-control w-1/2">
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="password" {...register("password", { required: true })} name="password" placeholder="password" className="input input-bordered" />
+                                <input type={showPassword ? 'text' : 'password'} {...register("password", { required: true })} name="password" placeholder="password" className="input input-bordered" />
                                 {errors.password && <span className='text-red-600 mt-1'>This field is required</span>}
                             </div>
-                            <div className="form-control w-1/2">
+                            <div className="form-control w-1/2 relative">
                                 <label className="label">
                                     <span className="label-text">Confirm Password</span>
                                 </label>
-                                <input type="confirm" {...register("confirm", { required: true })} name="confirm" placeholder="Confirm Password" className="input input-bordered" />
+                                <input type={showPassword ? 'text' : 'password'} {...register("confirm", { required: true })} name="confirm" placeholder="Confirm Password" className="input input-bordered" />
                                 {errors.confirm && <span className='text-red-600 mt-1'>This field is required</span>}
+
+                                <input className='absolute top-14 right-[360px]' type="checkbox" id="showPassword" onChange={handleCheckboxChange} />
                             </div>
                         </div>
                         <div className="form-control">
@@ -78,6 +86,7 @@ const SignUp = () => {
                         </div>
                     </form>
                     <p className='-mt-5 mb-5 ml-8'><small>Already have account? <Link to="/login">Please Login!</Link> </small></p>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>
