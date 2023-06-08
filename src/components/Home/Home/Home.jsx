@@ -1,3 +1,4 @@
+import Instructors from "../Instructors/Instructors";
 import MusicGropu from "../MusicGroup/MusicGropu";
 import PopularClasses from "../PopularClasses/PopularClasses";
 import Slider from "../Slider/Slider";
@@ -8,6 +9,7 @@ const Home = () => {
             <Slider></Slider>
             <PopularClasses></PopularClasses>
             <MusicGropu></MusicGropu>
+            <Instructors></Instructors>
         </div>
     );
 };
