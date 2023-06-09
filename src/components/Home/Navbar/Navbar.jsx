@@ -2,16 +2,27 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProviders";
 import Swal from "sweetalert2";
+import { FaShoppingCart } from 'react-icons/fa';
+import useCart from "../../../hooks/useCart";
 
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [cart] = useCart();
 
     const navItems = <>
         <li> <Link to='/'>Home</Link> </li>
         <li> <Link to='/login'>Instructors</Link> </li>
         <li> <Link to='/login'>Classes</Link> </li>
         {user && <li> <Link to='/login'>Dashboard</Link> </li>}
+        <li>
+            <Link to='/'>
+                <button className="flex gap-2 justify-center ">
+                    <FaShoppingCart></FaShoppingCart>
+                    <div className="badge badge-secondary">+{cart?.length || 0}</div>
+                </button>
+            </Link>
+        </li>
     </>
 
     const handleLogOut = () => {
@@ -20,7 +31,7 @@ const Navbar = () => {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'User Created Successfully',
+                    title: 'Logout Successfully',
                     showConfirmButton: false,
                     timer: 1500
                 })

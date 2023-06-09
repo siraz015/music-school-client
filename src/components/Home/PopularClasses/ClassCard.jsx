@@ -1,8 +1,59 @@
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProviders";
+import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
+import useCart from "../../../hooks/useCart";
 
 
 const ClassCard = ({ classItem }) => {
+    const { image, name, instructor, available_seats, price, _id } = classItem;
+    const { user } = useContext(AuthContext);
+    const [, refetch] = useCart();
 
-    const {image, name, instructor, available_seats, price} = classItem;
+    const navigate = useNavigate();
+    const location = useLocation();
+
+
+    const handleCard = item => {
+        console.log(item);
+
+        if (user && user.email) {
+            const cartItem = { classItemId: _id, image, name, available_seats, price, email: user.email }
+            fetch('http://localhost:5000/carts', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(cartItem)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.insertedId) {
+                        refetch();
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Class has been Booked',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                })
+        } else {
+            Swal.fire({
+                title: 'Please Login to order class',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Login Now!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate('/login', { state: { from: location } })
+                }
+            })
+        }
+    }
 
     return (
         <div>
@@ -13,8 +64,8 @@ const ClassCard = ({ classItem }) => {
                     <p>Instructor Name: {instructor}</p>
                     <p>Available Seats: {available_seats}</p>
                     <p>Price: {price}</p>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
+                    <div className="card-actions justify-center">
+                        <button onClick={() => handleCard(classItem)} className="btn btn-primary">Book Now</button>
                     </div>
                 </div>
             </div>
