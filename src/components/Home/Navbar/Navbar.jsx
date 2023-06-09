@@ -16,7 +16,7 @@ const Navbar = () => {
         <li> <Link to='/login'>Classes</Link> </li>
         {user && <li> <Link to='/login'>Dashboard</Link> </li>}
         <li>
-            <Link to='/'>
+            <Link to='/dashboard/selectedclasses'>
                 <button className="flex gap-2 justify-center ">
                     <FaShoppingCart></FaShoppingCart>
                     <div className="badge badge-secondary">+{cart?.length || 0}</div>

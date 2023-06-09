@@ -5,6 +5,9 @@ import Main from "../Layout/Main";
 import Home from "../components/Home/Home/Home";
 import Login from "../components/Login/Login";
 import SignUp from "../components/SignUp/SignUp";
+import Dashboard from "../Layout/Dashboard";
+import SelectedClasses from "../components/Dashboard/SelectedClasses/SelectedClasses";
+import EnrollClasses from "../components/Dashboard/EnrollClasses/EnrollClasses";
 
 export const router = createBrowserRouter([
     {
@@ -25,4 +28,18 @@ export const router = createBrowserRouter([
             }
         ]
     },
+    {
+        path: "dashboard",
+        element: <Dashboard></Dashboard>,
+        children: [
+            {
+                path: 'selectedclasses',
+                element: <SelectedClasses></SelectedClasses>
+            },
+            {
+                path: 'enrollclasses',
+                element: <EnrollClasses></EnrollClasses>
+            }
+        ]
+    }
 ]);
