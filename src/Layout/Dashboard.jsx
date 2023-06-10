@@ -1,9 +1,12 @@
 import { Link, Outlet } from 'react-router-dom';
+import useAdmin from '../hooks/useAdmin';
 
 const Dashboard = () => {
 
     // TODO: dynamic admin
-    const isAdmin = true;
+    // const isAdmin = true;
+    const [isAdmin] = useAdmin();
+
 
     return (
         <div className="drawer lg:drawer-open">

@@ -1,10 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useState } from "react";
 import { FaTrashAlt, FaUserAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 
 const AllUser = () => {
+    // const [disable, setDisable] = useState(false);
+
     const { data: users, isLoading, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
@@ -22,7 +25,7 @@ const AllUser = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                refetch()
+                refetch();
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -31,10 +34,25 @@ const AllUser = () => {
                     timer: 1500
                 })
             })
+
     }
 
-    const handleDelete = user => {
-        console.log(user);
+    const handleMakeInstructor = user => {
+        fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+            method: 'PATCH'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                refetch();
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: `${user.name} is an Instructor Now!`,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            })
     }
 
 
@@ -50,8 +68,6 @@ const AllUser = () => {
     return (
         <div className="w-10/12">
             <h2 className="text-center font-semibold text-2xl my-5">Total Stuents: {users?.length}</h2>
-
-
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
@@ -60,7 +76,7 @@ const AllUser = () => {
                             <th>#</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Role</th>
+                            <th>Current Role</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -70,15 +86,15 @@ const AllUser = () => {
                                 <td>{index + 1}</td>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
+                                <td>{user.role ? user.role : 'Student'}</td>
                                 <td>
                                     {
-                                        user.role === 'admin' ? 'Admin' :
-                                            <button onClick={() => handleMakeAdmin(user)} className="btn btn-ghost btn-lg bg-gray-500 text-white"> <FaUserAlt></FaUserAlt> </button>
+                                        <button onClick={() => handleMakeAdmin(user)} className="btn btn-primary"> Make Admin </button>
                                     }
                                 </td>
                                 <td>
                                     {
-                                        <button onClick={() => handleDelete(user)} className="btn btn-ghost btn-lg bg-red-600 text-white"> <FaTrashAlt></FaTrashAlt> </button>
+                                        <button onClick={() => handleMakeInstructor(user)} className="btn btn-primary"> Make Instructor </button>
                                     }
 
                                 </td>
