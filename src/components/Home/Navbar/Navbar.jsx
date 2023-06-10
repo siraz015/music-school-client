@@ -14,7 +14,7 @@ const Navbar = () => {
         <li> <Link to='/'>Home</Link> </li>
         <li> <Link to='/login'>Instructors</Link> </li>
         <li> <Link to='/login'>Classes</Link> </li>
-        {user && <li> <Link to='/login'>Dashboard</Link> </li>}
+        {user && <li> <Link to='/dashboard/selectedclasses'>Dashboard</Link> </li>}
         <li>
             <Link to='/dashboard/selectedclasses'>
                 <button className="flex gap-2 justify-center ">
@@ -64,7 +64,7 @@ const Navbar = () => {
                         user ?
                             <div className="avatar flex items-center">
                                 <div className="w-12 rounded-full">
-                                    {user && <img src={user?.photoURL} />}
+                                    {user && <img referrerPolicy="no-referrer" src={user?.photoURL} />}
                                 </div>
                                 <button onClick={handleLogOut} className="ml-5 btn">Log Out</button>
                             </div>

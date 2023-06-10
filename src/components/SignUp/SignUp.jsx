@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProviders';
 import Swal from 'sweetalert2';
 import SocialLogin from '../SocialLogin/SocialLogin';
@@ -9,6 +9,8 @@ const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { createUser, updateUserProfile } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
+
+    const navigate = useNavigate();
 
     const onSubmit = data => {
 
@@ -19,19 +21,33 @@ const SignUp = () => {
 
                 updateUserProfile(data.name, data.photoURL)
                     .then(() => {
-                        console.log('url profile info updated');
+                        const savedUser = { name: data.name, email: data.email }
+
+                        fetch('http://localhost:5000/users', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(savedUser)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'Sign Up Successfully',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                    navigate('/');
+                                }
+                            })
+
                     })
                     .catch(error => {
                         console.log(error);
                     })
-
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'User Created Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
             })
             .catch(err => {
                 console.log(err);
@@ -85,7 +101,7 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">Photo URL</span>
                             </label>
-                            <input type="photo" {...register("photoURL", { required: true })} name="photo" placeholder="Photo URL" className="input input-bordered" />
+                            <input type="photo" {...register("photo", { required: true })} name="photo" placeholder="PhotoURL" className="input input-bordered" />
                             {errors.photo && <span className='text-red-600 mt-1'>This field is required</span>}
                         </div>
                         <div className="form-control mt-6">

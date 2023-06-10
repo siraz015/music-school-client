@@ -18,13 +18,28 @@ const SocialLogin = () => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
 
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Login Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
+                const savedUser = { name: loggedUser.displayName, email: loggedUser.email }
+
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(savedUser)
                 })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.insertedId) {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Sign Up Successfully',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            navigate(from, { replace: true });
+                        }
+                    })
             })
             .catch(error => {
                 console.log(error);
