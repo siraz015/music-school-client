@@ -6,7 +6,8 @@ import useCart from "../../../hooks/useCart";
 
 
 const ClassCard = ({ classItem }) => {
-    const { image, className, instructorName, instructorEmail, availableSeats, price, _id } = classItem;
+    const { image, className, instructorName, instructorEmail, availableSets, price, _id } = classItem;
+
     const { user } = useContext(AuthContext);
     const [, refetch] = useCart();
 
@@ -14,11 +15,10 @@ const ClassCard = ({ classItem }) => {
     const location = useLocation();
 
 
-    const handleCard = item => {
-        console.log(item);
+    const handleCard = () => {
 
         if (user && user.email) {
-            const cartItem = { classItemId: _id, image, name, available_seats, price, email: user.email }
+            const cartItem = { classItemId: _id, image, className, instructorName, instructorEmail, availableSets, price, email: user.email }
             fetch('http://localhost:5000/carts', {
                 method: 'POST',
                 headers: {
@@ -62,10 +62,10 @@ const ClassCard = ({ classItem }) => {
                 <div className="card-body">
                     <h2 className="card-title">Class Name: {className}</h2>
                     <p>Instructor Name: {instructorName}</p>
-                    <p>Available Seats: {availableSeats}</p>
+                    <p>Available Seats: {availableSets}</p>
                     <p>Price: {price}</p>
                     <div className="card-actions justify-center">
-                        <button onClick={() => handleCard(classItem)} className="btn btn-primary">Book Now</button>
+                        <button onClick={() => handleCard()} className="btn btn-primary">Book Now</button>
                     </div>
                 </div>
             </div>

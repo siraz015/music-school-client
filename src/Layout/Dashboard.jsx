@@ -39,10 +39,10 @@ const Dashboard = () => {
                     </div>
 
                     {
-                        userRole.role === 'admin' ? <>
+                        userRole?.role === 'admin' ? <>
                             <li> <Link to="/dashboard/manageclasses">Manage Classes</Link> </li>
                             <li> <Link to="/dashboard/allusers">Manage Users</Link> </li>
-                        </> : userRole.role === 'instructor' ?
+                        </> : userRole?.role === 'instructor' ?
                             <>
                                 <li> <Link to="/dashboard/addaclass">Add A Class</Link> </li>
                                 <li> <Link to="/dashboard/myclasses">My Classes</Link> </li>

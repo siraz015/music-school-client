@@ -39,11 +39,10 @@ const SelectedClasses = () => {
 
 
     return (
-        <div className="w-full">
+        <div className="w-11/12">
             <div className="uppercase font-semibold flex justify-evenly h-[60px] ">
                 <h3>My Selected Classes: {cart.length}</h3>
                 <h3>Totoal Price: ${total}</h3>
-                <Link to="/dashboard/payment"><button className="btn btn-warning btn-sm">Pay</button></Link>
             </div>
 
             <div className="overflow-x-auto">
@@ -54,8 +53,10 @@ const SelectedClasses = () => {
                             <th> # </th>
                             <th>Cover Photo</th>
                             <th>Class Name</th>
+                            <th>Instructor Name</th>
                             <th>Price</th>
                             <th>Action</th>
+                            <th>Pay</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,7 +78,12 @@ const SelectedClasses = () => {
                                 </td>
                                 <td>
                                     {
-                                        item.name
+                                        item.className
+                                    }
+                                </td>
+                                <td>
+                                    {
+                                        item.instructorName
                                     }
                                 </td>
                                 <td>
@@ -86,7 +92,10 @@ const SelectedClasses = () => {
                                     }
                                 </td>
                                 <td>
-                                    <button onClick={() => handleDelete(item)} className="btn btn-ghost btn-lg bg-red-600 text-white"> <FaTrashAlt></FaTrashAlt> </button>
+                                    <button className="btn btn-secondary"> Pay </button>
+                                </td>
+                                <td>
+                                    <button onClick={() => handleDelete(item)} className="text-white bg-red-600 btn btn-warning "> <FaTrashAlt></FaTrashAlt> </button>
                                 </td>
                             </tr>)
                         }
