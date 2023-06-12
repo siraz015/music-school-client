@@ -21,7 +21,7 @@ const PopularClasses = () => {
             <p className="text-center text-2xl font-normal mb-5 text-slate-600">Unlock Your Musical Potential: Join Our Popular Classes Today!</p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 p-8">
                 {
-                    classesData?.map(classItem => <ClassCard key={classItem.available_seats} classItem={classItem}></ClassCard>)
+                    classesData?.map(classItem => <ClassCard key={classItem._id} classItem={classItem}></ClassCard>)
                 }
             </div>
         </div>

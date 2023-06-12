@@ -9,7 +9,6 @@ const Feedback = () => {
 
 
     const onSubmit = data => {
-
         const newFeedback = { feedback: data.feedback }
 
         fetch(`http://localhost:5000/classes/${singleData._id}`, {

@@ -14,6 +14,7 @@ import Feedback from "../components/Dashboard/Feedback/Feedback";
 import AddAClass from "../components/Dashboard/AddAClass/AddAClass";
 import MyClasses from "../components/Dashboard/MyClasses/MyClasses";
 import Update from "../components/Dashboard/Update/Update";
+import Payment from "../components/Dashboard/Payment/Payment";
 
 export const router = createBrowserRouter([
     {
@@ -71,6 +72,11 @@ export const router = createBrowserRouter([
                 path: 'update/:id',
                 element: <Update></Update>,
                 loader: ({params}) => fetch(`http://localhost:5000/dashboard/feedback/${params.id}`)
+            },
+            {
+                path: 'payment/:id',
+                element: <Payment></Payment>,
+                loader: ({params}) => fetch(`http://localhost:5000/dashboard/payment/${params.id}`)
             }
         ]
     }

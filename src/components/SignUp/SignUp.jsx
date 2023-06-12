@@ -19,8 +19,10 @@ const SignUp = () => {
                 const createdUser = result.user;
                 console.log(createdUser);
 
-                updateUserProfile(data.name, data.photoURL)
+                updateUserProfile(data.name, data.photo)
                     .then(() => {
+                        console.log('user profile updated');
+
                         const savedUser = { name: data.name, email: data.email }
 
                         fetch('http://localhost:5000/users', {
