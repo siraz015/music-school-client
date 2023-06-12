@@ -54,29 +54,6 @@ const AddAClass = () => {
 
                 }
             })
-
-
-        //         if (imgRes.success) {
-        //             const imgURL = imgRes.data.display_url;
-        //             const { name, price, category, recipe } = data;
-        //             const newItem = { name, price: parseFloat(price), category, recipe, image: imgURL }
-        //             console.log(newItem);
-        //             axios.post('/menu', newItem)
-        //                 .then(data => {
-        //                     console.log('after posting new menu', data);
-        //                     if (data.data.insertedId) {
-        //                         reset();
-        //                         Swal.fire({
-        //                             position: 'top-end',
-        //                             icon: 'success',
-        //                             title: 'Menu Item Added Successfully',
-        //                             showConfirmButton: false,
-        //                             timer: 1500
-        //                         })
-        //                     }
-        //                 })
-        //         }
-        //     })
     };
 
 

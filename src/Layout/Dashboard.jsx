@@ -32,8 +32,11 @@ const Dashboard = () => {
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-60 h-full bg-base-200 text-base-content">
-                    <h2 className='text-center uppercase bg-orange-600 py-2 text-2xl font-semibold rounded text-white mb-10'>{userRole.role ? userRole.role : 'Student'}</h2>
-
+                    <div className='bg-orange-600 rounded-lg py-4 mb-10'>
+                        <h2 className='text-center uppercase text-2xl font-semibold text-white'>{userRole.role ? userRole.role : 'Student'}</h2>
+                        <p className='text-center text-lg text-white'>{userRole.name}</p>
+                        <p className='text-center text-lg text-white'>{userRole.email}</p>
+                    </div>
 
                     {
                         userRole.role === 'admin' ? <>
