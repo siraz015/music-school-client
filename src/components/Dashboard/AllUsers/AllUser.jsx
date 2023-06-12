@@ -56,15 +56,6 @@ const AllUser = () => {
     }
 
 
-    // Swal.fire({
-    //     position: 'top-end',
-    //     icon: 'success',
-    //     title: `${user.name} is an Admin Now!`,
-    //     showConfirmButton: false,
-    //     timer: 1500
-    // })
-
-
     return (
         <div className="w-10/12">
             <h2 className="text-center font-semibold text-2xl my-5">Total Stuents: {users?.length}</h2>
@@ -89,12 +80,12 @@ const AllUser = () => {
                                 <td>{user.role ? user.role : 'Student'}</td>
                                 <td>
                                     {
-                                        <button onClick={() => handleMakeAdmin(user)} className="btn btn-primary"> Make Admin </button>
+                                        <button disabled={user.role === 'admin' ? true : false} onClick={() => handleMakeAdmin(user)} className="btn btn-primary"> Make Admin </button>
                                     }
                                 </td>
                                 <td>
                                     {
-                                        <button onClick={() => handleMakeInstructor(user)} className="btn btn-primary"> Make Instructor </button>
+                                        <button disabled={user.role === 'instructor' ? true : false} onClick={() => handleMakeInstructor(user)} className="btn btn-primary"> Make Instructor </button>
                                     }
 
                                 </td>

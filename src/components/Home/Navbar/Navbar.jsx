@@ -14,7 +14,7 @@ const Navbar = () => {
         <li> <Link to='/'>Home</Link> </li>
         <li> <Link to='/login'>Instructors</Link> </li>
         <li> <Link to='/login'>Classes</Link> </li>
-        {user && <li> <Link to='/dashboard/selectedclasses'>Dashboard</Link> </li>}
+        {user && <li> <Link to='/dashboard'>Dashboard</Link> </li>}
         <li>
             <Link to='/dashboard/selectedclasses'>
                 <button className="flex gap-2 justify-center ">

@@ -34,11 +34,11 @@ const Login = () => {
                 navigate(from, { replace: true });
             })
             .catch(err => {
-                console.log(err);
+                console.log(err.message);
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: { err },
+                    title: err.message,
                     showConfirmButton: false,
                     timer: 1500
                 })

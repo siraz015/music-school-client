@@ -6,7 +6,7 @@ import useCart from "../../../hooks/useCart";
 
 
 const ClassCard = ({ classItem }) => {
-    const { image, name, instructor, available_seats, price, _id } = classItem;
+    const { image, className, instructorName, instructorEmail, availableSeats, price, _id } = classItem;
     const { user } = useContext(AuthContext);
     const [, refetch] = useCart();
 
@@ -58,11 +58,11 @@ const ClassCard = ({ classItem }) => {
     return (
         <div>
             <div className="card w-96 bg-base-100 shadow-xl">
-                <figure><img src={image} alt="img" /></figure>
+                <figure><img className="w-full h-[250px]" src={image} alt="img" /></figure>
                 <div className="card-body">
-                    <h2 className="card-title">Class Name: {name}</h2>
-                    <p>Instructor Name: {instructor}</p>
-                    <p>Available Seats: {available_seats}</p>
+                    <h2 className="card-title">Class Name: {className}</h2>
+                    <p>Instructor Name: {instructorName}</p>
+                    <p>Available Seats: {availableSeats}</p>
                     <p>Price: {price}</p>
                     <div className="card-actions justify-center">
                         <button onClick={() => handleCard(classItem)} className="btn btn-primary">Book Now</button>
