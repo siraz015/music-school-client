@@ -17,7 +17,7 @@ const Payment = () => {
             <h2 className="my-5 text-center text-2xl font-semibold">Please Payment!</h2>
 
             <Elements stripe={stripePromise}>
-                <CheckOut price={price}></CheckOut>
+                <CheckOut paymentClass={paymentClass} price={price}></CheckOut>
             </Elements>
         </div>
     );

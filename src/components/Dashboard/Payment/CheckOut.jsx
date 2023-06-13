@@ -2,9 +2,10 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProviders";
 import axios from "axios";
+// import './checkOut.css'
 
 
-const CheckOut = ({ price }) => {
+const CheckOut = ({ price, paymentClass }) => {
     const { user } = useContext(AuthContext);
     const stripe = useStripe();
     const elements = useElements();
@@ -15,11 +16,12 @@ const CheckOut = ({ price }) => {
 
     useEffect(() => {
 
-        axios.post('http://localhost:5000/create-payment-intent', { price })
-            .then(res => {
-                // console.log(res.data.clientSecret);
-                setClientSecret(res.data.clientSecret)
-            })
+        if (price > 0) {
+            axios.post('http://localhost:5000/create-payment-intent', { price })
+                .then(res => {
+                    setClientSecret(res.data.clientSecret)
+                })
+        }
 
     }, [])
 
@@ -71,9 +73,29 @@ const CheckOut = ({ price }) => {
 
         setProcessing(false);
 
-        if(paymentIntent.status === 'succeeded'){
+        if (paymentIntent.status === 'succeeded') {
             // const transactionId = paymentIntent.id;
             setTransactionId(paymentIntent.id)
+
+            // save payment information to the server
+            const payment = {
+                email: user?.email,
+                transactionId: paymentIntent.id,
+                price,
+                date: new Date(),
+                itemName: paymentClass.className,
+                cartId: paymentClass._id,
+                classId: paymentClass.classItemId,
+                // status: 'service pending'      
+            }
+
+            axios.post('http://localhost:5000/payment', payment)
+                .then(res => {
+                    console.log(res.data);
+                    if (res.data.insertedId) {
+                        // display confirm
+                    }
+                })
         }
 
     }
@@ -102,7 +124,7 @@ const CheckOut = ({ price }) => {
                 </button>
             </form>
             {cardError && <p className="text-red-600">{cardError}</p>}
-            {transactionId && <p className="text-green-600">Transaction Success with transactionId: {transactionId}</p> }
+            {transactionId && <p className="text-green-600">Transaction Success with transactionId: {transactionId}</p>}
 
         </>
     );
