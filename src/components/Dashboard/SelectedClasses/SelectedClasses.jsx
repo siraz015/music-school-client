@@ -39,8 +39,8 @@ const SelectedClasses = () => {
 
 
     return (
-        <div className="w-11/12">
-            <div className="uppercase font-semibold flex justify-evenly h-[60px] ">
+        <div className="w-11/12 mt-10">
+            <div className="font-semibold flex justify-evenly h-[60px] bg-slate-500 text-2xl items-center text-white rounded-lg">
                 <h3>My Selected Classes: {cart.length}</h3>
                 <h3>Totoal Price: ${total}</h3>
             </div>
@@ -49,7 +49,7 @@ const SelectedClasses = () => {
                 <table className="table w-full">
                     {/* <!-- head --> */}
                     <thead>
-                        <tr>
+                        <tr className="text-black">
                             <th> # </th>
                             <th>Cover Photo</th>
                             <th>Class Name</th>
@@ -64,11 +64,11 @@ const SelectedClasses = () => {
                             cart.map((item, index) => <tr
                                 key={item._id}
                             >
-                                <th>
+                                <td>
                                     <label>
                                         {index + 1}
                                     </label>
-                                </th>
+                                </td>
                                 <td>
                                     <div className="avatar">
                                         <div className="mask mask-squircle w-12 h-12">

@@ -3,6 +3,7 @@ import { AuthContext } from "../../../providers/AuthProviders";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useCart from "../../../hooks/useCart";
+import { Fade } from "react-awesome-reveal";
 
 
 const ClassCard = ({ classItem }) => {
@@ -57,19 +58,21 @@ const ClassCard = ({ classItem }) => {
 
     return (
         <div>
-            <div className="card w-96 bg-base-100 shadow-xl">
-                <figure><img className="w-full h-[250px]" src={image} alt="img" /></figure>
-                <div className="card-body">
-                    <h2 className="card-title">Class Name: {className}</h2>
-                    <p>Instructor Name: {instructorName}</p>
-                    <p>Available Seats: {availableSets}</p>
-                    <p>Price: {price}</p>
-                    <div className="card-actions justify-center">
-                        <button onClick={() => handleCard()} className="btn btn-primary">Book Now</button>
+            <Fade direction="up" delay={500} triggerOnce>
+                <div className="card w-96 bg-base-100 shadow-xl">
+                    <figure><img className="w-full h-[250px]" src={image} alt="img" /></figure>
+                    <div className="card-body">
+                        <h2 className="card-title">Class Name: {className}</h2>
+                        <p>Instructor Name: {instructorName}</p>
+                        <p>Available Seats: {availableSets}</p>
+                        <p>Price: {price}</p>
+                        <div className="card-actions justify-center">
+                            <button onClick={() => handleCard()} className="btn btn-primary">Book Now</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </Fade>
+        </div >
     );
 };
 

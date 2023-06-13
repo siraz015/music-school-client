@@ -2,6 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProviders";
 import axios from "axios";
+import Swal from "sweetalert2";
 // import './checkOut.css'
 
 
@@ -69,8 +70,6 @@ const CheckOut = ({ price, paymentClass }) => {
             console.log(confirmError);
         }
 
-        console.log(paymentIntent);
-
         setProcessing(false);
 
         if (paymentIntent.status === 'succeeded') {
@@ -86,23 +85,38 @@ const CheckOut = ({ price, paymentClass }) => {
                 itemName: paymentClass.className,
                 cartId: paymentClass._id,
                 classId: paymentClass.classItemId,
-                // status: 'service pending'      
             }
 
             axios.post('http://localhost:5000/payment', payment)
                 .then(res => {
-                    console.log(res.data);
-                    if (res.data.insertedId) {
+                    if (res.data.insertResult) {
                         // display confirm
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Payment Successfully',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                     }
+                })
+
+            console.log(paymentClass);
+
+            fetch(`http://localhost:5000/updateClass/${paymentClass.classItemId}`, {
+                method: 'PATCH'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
                 })
         }
 
     }
 
     return (
-        <>
-            <form onSubmit={handleSubmit}>
+        <div>
+            <form onSubmit={handleSubmit} className="w-8/12 mx-auto">
                 <CardElement
                     options={{
                         style: {
@@ -118,15 +132,16 @@ const CheckOut = ({ price, paymentClass }) => {
                             },
                         },
                     }}
+                    className="bg-white shadow-lg p-4 rounded-lg"
                 />
-                <button className="btn btn-secondary btn-sm my-5" type="submit" disabled={!stripe || !clientSecret || processing}>
+                <button className="btn btn-secondary btn-sm w-3/12 my-6" type="submit" disabled={!stripe || !clientSecret || processing}>
                     Pay
                 </button>
             </form>
             {cardError && <p className="text-red-600">{cardError}</p>}
             {transactionId && <p className="text-green-600">Transaction Success with transactionId: {transactionId}</p>}
 
-        </>
+        </div>
     );
 };
 

@@ -1,7 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
-import { FaTrashAlt, FaUserAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 
