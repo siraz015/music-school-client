@@ -12,7 +12,7 @@ const MyClasses = () => {
     const { data: classByUser, isLoading } = useQuery({
         queryKey: ['classByUser'],
         queryFn: async () => {
-            const data = await axios(`http://localhost:5000/classes/${user?.email}`)
+            const data = await axios(`https://music-school-server-one.vercel.app/classes/${user?.email}`)
             return data.data;
         }
     })

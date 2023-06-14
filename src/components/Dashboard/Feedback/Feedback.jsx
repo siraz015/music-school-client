@@ -16,7 +16,7 @@ const Feedback = () => {
     const onSubmit = data => {
         const newFeedback = { feedback: data.feedback }
 
-        fetch(`http://localhost:5000/classes/${singleData._id}`, {
+        fetch(`https://music-school-server-one.vercel.app/classes/${singleData._id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'

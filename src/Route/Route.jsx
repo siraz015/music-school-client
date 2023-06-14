@@ -78,7 +78,7 @@ export const router = createBrowserRouter([
             {
                 path: 'feedback/:id',
                 element: <Feedback></Feedback>,
-                loader: ({params}) => fetch(`http://localhost:5000/dashboard/feedback/${params.id}`)
+                loader: ({params}) => fetch(`https://music-school-server-one.vercel.app/dashboard/feedback/${params.id}`)
             },
             {
                 path: 'addaclass',
@@ -91,12 +91,12 @@ export const router = createBrowserRouter([
             {
                 path: 'update/:id',
                 element: <Update></Update>,
-                loader: ({params}) => fetch(`http://localhost:5000/dashboard/feedback/${params.id}`)
+                loader: ({params}) => fetch(`https://music-school-server-one.vercel.app/dashboard/feedback/${params.id}`)
             },
             {
                 path: 'payment/:id',
                 element: <Payment></Payment>,
-                loader: ({params}) => fetch(`http://localhost:5000/dashboard/payment/${params.id}`)
+                loader: ({params}) => fetch(`https://music-school-server-one.vercel.app/dashboard/payment/${params.id}`)
             }
         ]
     }

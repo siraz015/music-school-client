@@ -11,7 +11,7 @@ const DashboardHome = () => {
     const { data: userRole, isLoading } = useQuery({
         queryKey: ['userRole'],
         queryFn: async () => {
-            const data = await axios(`http://localhost:5000/users/${user?.email}`)
+            const data = await axios(`https://music-school-server-one.vercel.app/users/${user?.email}`)
             return data.data;
         }
     })

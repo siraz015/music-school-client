@@ -20,7 +20,7 @@ const ClassCard = ({ classItem }) => {
 
         if (user && user.email) {
             const cartItem = { classItemId: _id, image, className, instructorName, instructorEmail, availableSets, price, email: user.email }
-            fetch('http://localhost:5000/carts', {
+            fetch('https://music-school-server-one.vercel.app/carts', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

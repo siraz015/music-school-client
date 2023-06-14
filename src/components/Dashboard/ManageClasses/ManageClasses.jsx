@@ -7,7 +7,7 @@ const ManageClasses = () => {
     const { data: classes, isLoading, refetch } = useQuery({
         queryKey: ['classes'],
         queryFn: async () => {
-            const data = await axios('http://localhost:5000/classes')
+            const data = await axios('https://music-school-server-one.vercel.app/classes')
             return data.data;
         }
     })
@@ -15,7 +15,7 @@ const ManageClasses = () => {
     if (isLoading) return 'Loading...'
 
     const handleApprove = classItem => {
-        fetch(`http://localhost:5000/classes/approve/${classItem._id}`, {
+        fetch(`https://music-school-server-one.vercel.app/classes/approve/${classItem._id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -33,7 +33,7 @@ const ManageClasses = () => {
     }
 
     const handleDeny = classItem => {
-        fetch(`http://localhost:5000/classes/deny/${classItem._id}`, {
+        fetch(`https://music-school-server-one.vercel.app/classes/deny/${classItem._id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())

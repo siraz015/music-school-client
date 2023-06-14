@@ -8,7 +8,7 @@ const InstructorPage = () => {
     const { data: allUser, isLoading } = useQuery({
         queryKey: ['instructorData'],
         queryFn: async () => {
-            const data = await axios('http://localhost:5000/users')
+            const data = await axios('https://music-school-server-one.vercel.app/users')
             return data?.data;
         }
     })

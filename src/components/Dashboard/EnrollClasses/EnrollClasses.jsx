@@ -10,7 +10,7 @@ const EnrollClasses = () => {
     const { data: paymentData, isLoading, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const data = await axios(`http://localhost:5000/payment/${user?.email}`)
+            const data = await axios(`https://music-school-server-one.vercel.app/payment/${user?.email}`)
             return data.data;
         }
     })

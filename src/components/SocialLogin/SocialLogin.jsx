@@ -20,7 +20,7 @@ const SocialLogin = () => {
 
                 const savedUser = { name: loggedUser.displayName, email: loggedUser.email }
 
-                fetch('http://localhost:5000/users', {
+                fetch('https://music-school-server-one.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

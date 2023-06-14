@@ -21,7 +21,7 @@ const CheckOut = ({ price, paymentClass }) => {
     useEffect(() => {
 
         if (price > 0) {
-            axios.post('http://localhost:5000/create-payment-intent', { price })
+            axios.post('https://music-school-server-one.vercel.app/create-payment-intent', { price })
                 .then(res => {
                     setClientSecret(res.data.clientSecret)
                 })
@@ -90,7 +90,7 @@ const CheckOut = ({ price, paymentClass }) => {
                 classId: paymentClass.classItemId,
             }
 
-            axios.post('http://localhost:5000/payment', payment)
+            axios.post('https://music-school-server-one.vercel.app/payment', payment)
                 .then(res => {
                     if (res.data.insertResult) {
                         // display confirm
@@ -106,7 +106,7 @@ const CheckOut = ({ price, paymentClass }) => {
 
             console.log(paymentClass);
 
-            fetch(`http://localhost:5000/updateClass/${paymentClass.classItemId}`, {
+            fetch(`https://music-school-server-one.vercel.app/updateClass/${paymentClass.classItemId}`, {
                 method: 'PATCH'
             })
                 .then(res => res.json())

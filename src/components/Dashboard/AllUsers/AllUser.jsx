@@ -9,7 +9,7 @@ const AllUser = () => {
     const { data: users, isLoading, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const data = await axios('http://localhost:5000/users')
+            const data = await axios('https://music-school-server-one.vercel.app/users')
             return data.data;
         }
     })
@@ -17,7 +17,7 @@ const AllUser = () => {
     if (isLoading) return 'Loading...'
 
     const handleMakeAdmin = user => {
-        fetch(`http://localhost:5000/users/admin/${user._id}`, {
+        fetch(`https://music-school-server-one.vercel.app/users/admin/${user._id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -36,7 +36,7 @@ const AllUser = () => {
     }
 
     const handleMakeInstructor = user => {
-        fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+        fetch(`https://music-school-server-one.vercel.app/users/instructor/${user._id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())

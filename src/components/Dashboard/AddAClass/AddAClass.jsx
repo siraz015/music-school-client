@@ -29,7 +29,7 @@ const AddAClass = () => {
                     const newClass = { className: name, instructorName, instructorEmail, price: parseFloat(price), availableSets: parseInt(availableSets), image: imgURL, student: 0 }
                     console.log(newClass);
 
-                    fetch('http://localhost:5000/classes', {
+                    fetch('https://music-school-server-one.vercel.app/classes', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'

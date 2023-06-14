@@ -8,7 +8,7 @@ const PopularClasses = () => {
     const {data: classesData, isLoading} = useQuery({
         queryKey: ['classesData'],
         queryFn: async () => {
-            const data = await axios('http://localhost:5000/classes')
+            const data = await axios('https://music-school-server-one.vercel.app/classes')
             return data.data;
         }
     })

@@ -33,7 +33,7 @@ const Update = () => {
                     const newClass = { className: name, instructorName, instructorEmail, price: parseFloat(price), availableSets: parseInt(availableSets), image: imgURL }
                     console.log(newClass);
 
-                    fetch(`http://localhost:5000/classes/${_id}`, {
+                    fetch(`https://music-school-server-one.vercel.app/classes/${_id}`, {
                         method: 'PUT',
                         headers: {
                             'content-type': 'application/json'

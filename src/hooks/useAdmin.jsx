@@ -9,7 +9,7 @@ const useAdmin = () => {
     const { data: isAdmin, isLoading: isAdminLoading } = useQuery({
         queryKey: ['isAdmin', user?.email],
         queryFn: async () => {
-            const res = await axios(`http://localhost:5000/users/admin/${user?.email}`)
+            const res = await axios(`https://music-school-server-one.vercel.app/users/admin/${user?.email}`)
             return res.data.admin;
         }
     })
