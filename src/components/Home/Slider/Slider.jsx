@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Slider = () => {
     return (
         <div className="max-w-[1280px] px-5 mx-auto">
-            <div className="carousel">
+            <div className="carousel mt-16">
                 <div id="slide1" className="carousel-item relative w-full h-[600px] bg-red-700">
                     <img src="https://i.ibb.co/Db1C0T9/S1.jpg" className="w-full" />
                     <div className='absolute flex items-center h-full w-full top-0 left-0 bg-black bg-opacity-40'>

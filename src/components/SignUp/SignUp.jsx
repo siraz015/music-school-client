@@ -64,7 +64,7 @@ const SignUp = () => {
 
 
     return (
-        <div className="bg-base-100">
+        <div className="bg-base-100 pt-20">
             <div className="max-w-[800px] mx-auto">
                 <div className="shadow-2xl card">
                     <form onSubmit={handleSubmit(onSubmit)} className="card-body">

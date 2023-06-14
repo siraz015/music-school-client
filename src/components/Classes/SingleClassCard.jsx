@@ -6,7 +6,7 @@ import useCart from "../../hooks/useCart";
 import Swal from "sweetalert2";
 
 const SingleClassCard = ({ singleClass }) => {
-    const { image, className, instructorName, instructorEmail, availableSets, price, _id } = singleClass;
+    const { image, className, instructorName, instructorEmail, availableSets, price, student, _id } = singleClass;
 
     const { user } = useContext(AuthContext);
     const [, refetch] = useCart();
@@ -65,7 +65,8 @@ const SingleClassCard = ({ singleClass }) => {
                         <h2 className="card-title">Class Name: {className}</h2>
                         <p>Instructor Name: {instructorName}</p>
                         <p>Available Seats: {availableSets}</p>
-                        <p>Price: {price}</p>
+                        <p>Price: ${price}</p>
+                        <p>Student: {student}</p>
                         <div className="card-actions justify-center">
                             <button onClick={() => handleCard()} className="btn btn-primary">Book Now</button>
                         </div>

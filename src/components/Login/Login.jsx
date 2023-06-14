@@ -53,7 +53,7 @@ const Login = () => {
     return (
         <>
             <div className="bg-base-100">
-                <div className="max-w-[1100px] mx-auto flex gap-20 my-5">
+                <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center gap-20 pt-20">
                     <div className="shadow-2xl md:w-1/2 card">
                         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                             <h2 className='text-5xl text-center font-semibold mb-5'>Please Login!</h2>

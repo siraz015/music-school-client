@@ -1,12 +1,29 @@
-import { Link, Outlet } from 'react-router-dom';
-import useAdmin from '../hooks/useAdmin';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProviders';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import { FaHome, FaAddressBook, FaAddressCard, FaUserEdit, FaUserSecret, FaUserCheck, FaUserClock } from 'react-icons/fa';
 
 const Dashboard = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Logout Successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                navigate('/')
+            })
+            .catch(err => console.log(err))
+    }
 
     // fetch admin role
     const { data: userRole, isLoading } = useQuery({
@@ -40,22 +57,25 @@ const Dashboard = () => {
 
                     {
                         userRole?.role === 'admin' ? <>
-                            <li> <Link to="/dashboard/manageclasses">Manage Classes</Link> </li>
-                            <li> <Link to="/dashboard/allusers">Manage Users</Link> </li>
+                            <li className='text-base font-semibold'> <Link to="/dashboard/manageclasses"> <FaUserSecret></FaUserSecret> Manage Classes</Link> </li>
+                            <li className='text-base font-semibold'> <Link to="/dashboard/allusers"> <FaUserEdit></FaUserEdit> Manage Users</Link> </li>
                         </> : userRole?.role === 'instructor' ?
                             <>
-                                <li> <Link to="/dashboard/addaclass">Add A Class</Link> </li>
-                                <li> <Link to="/dashboard/myclasses">My Classes</Link> </li>
+                                <li className='text-base font-semibold'> <Link to="/dashboard/addaclass"> <FaAddressBook></FaAddressBook> Add A Class</Link> </li>
+                                <li className='text-base font-semibold'> <Link to="/dashboard/myclasses"> <FaAddressCard></FaAddressCard> My Classes</Link> </li>
                             </> :
                             <>
-                                <li> <Link to="/dashboard/selectedclasses">My Selected Classes</Link> </li>
-                                <li> <Link to="/dashboard/enrollclasses">My Enrolled Classes</Link> </li>
+                                <li className='text-base font-semibold'> <Link to="/dashboard/selectedclasses"> <FaUserClock></FaUserClock> My Selected Classes</Link> </li>
+                                <li className='text-base font-semibold'> <Link to="/dashboard/enrollclasses"> <FaUserCheck></FaUserCheck> My Enrolled Classes</Link> </li>
                             </>
                     }
 
                     <div className='divider'></div>
 
-                    <li> <Link to="/">Home</Link> </li>
+                    <div className='flex flex-col'>
+                        <li className='text-base font-semibold'> <Link to="/"> <FaHome></FaHome> Home</Link> </li>
+                        <button disabled={user ? false : true} onClick={handleLogOut} className='btn btn-secondary mt-20'>Log Out</button>
+                    </div>
 
                 </ul>
 

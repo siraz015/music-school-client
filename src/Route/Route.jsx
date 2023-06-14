@@ -17,6 +17,7 @@ import Update from "../components/Dashboard/Update/Update";
 import Payment from "../components/Dashboard/Payment/Payment";
 import InstructorPage from "../components/InstructorPage/InstructorPage";
 import Classes from "../components/Classes/Classes";
+import ErrorPage from "../components/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
                 element: <SignUp></SignUp>
             }
         ]
+    },
+    {
+        path: '*',
+        element: <ErrorPage></ErrorPage>
     },
     {
         path: "dashboard",
