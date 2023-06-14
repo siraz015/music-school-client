@@ -7,23 +7,22 @@ import SocialLogin from '../SocialLogin/SocialLogin';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const { createUser, updateUserProfile, logOut } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
 
     const onSubmit = data => {
-
         createUser(data.email, data.password)
             .then(result => {
                 const createdUser = result.user;
                 console.log(createdUser);
 
-                updateUserProfile(data.name, data.photo)
-                    .then(() => {
-                        console.log('user profile updated');
+                updateUserProfile(data.name, data.photoURL)
+                    .then((up) => {
+                        console.log('user profile updated', up);
 
-                        const savedUser = { name: data.name, email: data.email }
+                        const savedUser = { name: data.name, email: data.email, image: data.photoURL, role: 'student' }
 
                         fetch('http://localhost:5000/users', {
                             method: 'POST',
@@ -42,10 +41,13 @@ const SignUp = () => {
                                         showConfirmButton: false,
                                         timer: 1500
                                     })
-                                    navigate('/');
+                                    navigate('/login');
                                 }
                             })
 
+                        logOut()
+                            .then(() => {})
+                            .catch(err => console.log(err))
                     })
                     .catch(error => {
                         console.log(error);
@@ -86,8 +88,16 @@ const SignUp = () => {
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type={showPassword ? 'text' : 'password'} {...register("password", { required: true })} name="password" placeholder="password" className="input input-bordered" />
-                                {errors.password && <span className='text-red-600 mt-1'>This field is required</span>}
+                                <input type={showPassword ? 'text' : 'password'} {...register("password", {
+                                    required: true,
+                                    minLength: 6,
+                                    maxLength: 20,
+                                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
+                                })} name="password" placeholder="password" className="input input-bordered" />
+                                {errors.password?.type === 'required' && <p role="alert">Password is required</p>}
+                                {errors.password?.type === 'minLength' && <p role="alert">Password must be 6 Charactor</p>}
+                                {errors.password?.type === 'pattern' && <p role="alert">Password mush have One Uppercase, Oner Letter and One Special Charactor is required</p>}
+
                             </div>
                             <div className="form-control w-1/2 relative">
                                 <label className="label">
@@ -103,7 +113,7 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">Photo URL</span>
                             </label>
-                            <input type="photo" {...register("photo", { required: true })} name="photo" placeholder="PhotoURL" className="input input-bordered" />
+                            <input type="text" {...register("photoURL", { required: true })} name="photoURL" placeholder="PhotoURL" className="input input-bordered" />
                             {errors.photo && <span className='text-red-600 mt-1'>This field is required</span>}
                         </div>
                         <div className="form-control mt-6">

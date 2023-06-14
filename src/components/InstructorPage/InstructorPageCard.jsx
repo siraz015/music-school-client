@@ -1,8 +1,7 @@
 import { Fade } from "react-awesome-reveal";
 
-
-const InstructorCard = ({ instructorItem }) => {
-    const { image, name, email } = instructorItem;
+const InstructorPageCard = ({singleInstructor}) => {
+    const { image, name, email } = singleInstructor;
 
     return (
         <div>
@@ -19,4 +18,4 @@ const InstructorCard = ({ instructorItem }) => {
     );
 };
 
-export default InstructorCard;
+export default InstructorPageCard;
