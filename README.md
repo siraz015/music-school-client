@@ -14,4 +14,4 @@ use package
     - express js
 
 ## Live Link
-Hosted in Netlify -> [Toy Cars Hut](https://music-school-de3de.web.app/)
+Hosted in Netlify -> [Music School Project](https://music-school-de3de.web.app/)
