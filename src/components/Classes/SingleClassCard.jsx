@@ -6,6 +6,7 @@ import useCart from "../../hooks/useCart";
 import Swal from "sweetalert2";
 
 const SingleClassCard = ({ singleClass }) => {
+
     const { image, className, instructorName, instructorEmail, availableSets, price, student, _id } = singleClass;
 
     const { user } = useContext(AuthContext);
@@ -13,7 +14,6 @@ const SingleClassCard = ({ singleClass }) => {
 
     const navigate = useNavigate();
     const location = useLocation();
-
 
     const handleCard = () => {
 

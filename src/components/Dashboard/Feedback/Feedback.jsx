@@ -1,9 +1,14 @@
 import { useForm } from "react-hook-form";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Feedback = () => {
     const singleData = useLoaderData();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
 
     const { register, handleSubmit, reset } = useForm();
 
@@ -30,6 +35,7 @@ const Feedback = () => {
                     showConfirmButton: false,
                     timer: 1500
                 })
+                navigate(from, { replace: true });
             })
     };
 

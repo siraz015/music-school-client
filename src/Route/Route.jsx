@@ -18,6 +18,7 @@ import Payment from "../components/Dashboard/Payment/Payment";
 import InstructorPage from "../components/InstructorPage/InstructorPage";
 import Classes from "../components/Classes/Classes";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
+import DashboardHome from "../components/Dashboard/DashboardHome/DashboardHome";
 
 export const router = createBrowserRouter([
     {
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
         path: "dashboard",
         element: <Dashboard></Dashboard>,
         children: [
+            {
+                path: '',
+                element: <DashboardHome></DashboardHome>
+            },
             {
                 path: 'selectedclasses',
                 element: <SelectedClasses></SelectedClasses>

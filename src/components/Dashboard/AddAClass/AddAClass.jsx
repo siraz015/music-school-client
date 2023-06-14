@@ -26,7 +26,7 @@ const AddAClass = () => {
                 if (imgRes.success) {
                     const imgURL = imgRes.data.display_url;
                     const { name, instructorName, instructorEmail, availableSets, price } = data;
-                    const newClass = { className: name, instructorName, instructorEmail, price: parseFloat(price), availableSets: parseInt(availableSets), image: imgURL }
+                    const newClass = { className: name, instructorName, instructorEmail, price: parseFloat(price), availableSets: parseInt(availableSets), image: imgURL, student: 0 }
                     console.log(newClass);
 
                     fetch('http://localhost:5000/classes', {

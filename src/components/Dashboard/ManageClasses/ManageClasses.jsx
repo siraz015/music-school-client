@@ -25,7 +25,7 @@ const ManageClasses = () => {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: `${classItem.name} is an Approve Now!`,
+                    title: `${classItem.className} is an Approve Now!`,
                     showConfirmButton: false,
                     timer: 1500
                 })
@@ -43,7 +43,7 @@ const ManageClasses = () => {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: `${classItem.name} is Denied!`,
+                    title: `${classItem.className} is Denied!`,
                     showConfirmButton: false,
                     timer: 1500
                 })

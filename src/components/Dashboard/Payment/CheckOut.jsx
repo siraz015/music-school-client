@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProviders";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 // import './checkOut.css'
 
 
@@ -14,6 +15,8 @@ const CheckOut = ({ price, paymentClass }) => {
     const [clientSecret, setClientSecret] = useState('');
     const [processing, setProcessing] = useState(false);
     const [transactionId, setTransactionId] = useState('');
+
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -110,6 +113,8 @@ const CheckOut = ({ price, paymentClass }) => {
                 .then(data => {
                     console.log(data);
                 })
+
+            navigate('/dashboard/selectedclasses');
         }
 
     }
